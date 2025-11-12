@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Borrar Proveedor
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'proveedor_app:proveedores' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-x centrado margen-sup">
+            <h1>Borrar proveedores</h1>
+            <div class="cell">
+                <form class="cell grid-x grid-margin-x centrado" method="post"> {% csrf_token %}
+                    <div class="callout secondary">
+                        <label>
+                            <h3>¿Desea eliminar el proveedor? </h3>
+                            <p class="input-p text__inicio">CUIT o CUIL proveedor: {{ object.cuit_o_cuil }}</p>
+                            <p class="input-p text__inicio">Razon social proveedor: {{ object.razon_social }}</p>
+                        </label>
+                        <form action="" method="post"> {% csrf_token %}
+                            <button type="submit" class="button-general button-borrar">Confirmar</button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

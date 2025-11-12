@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Sala de {{ room.name }}
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="container">
+        <div class="grid-x">
+            <div class="cell large-12">
+                <h1 aria-label="Titulo principal">Sala de Chat: {{ room.name }}</h1>
+                <h2 class="h2-tamaño" aria-label="Nombre de usuarios">Usuario: {{ request.user }}</h2>
+            </div>
+            <div class="cell large-9 large-9--modificacion">
+                <div>
+                    <div class="bordered-container">
+                        {# incrustamos el mensaje pasado desde js #}
+                        <div id="messageContainer">
+                            <div class="contenedor-boton">
+                                <button class="button button-general--modificacion cell large-3" id="showAllBtn">Mostrar Todos</button>
+                                <button class="button button-general--modificacion cell large-3" id="showLessBtn">Mostrar Menos</button>
+                            </div>
+                        </div>
+                        <div class="contorno-chat" id="chatContainer">
+                            <div class="contenedor-mensajes">
+                                <!-- Aquí se cargarán los mensajes -->
+                                <div id="boxMessagess"></div>
+                                <div>
+                                    <p class="historial"><strong>↑↑ Historial ↑↑</strong></p>
+                                </div>
+                            </div>
+                            <div id="boxMessages"></div>
+                        </div>
+                        <div class="chat-control">
+                            <div id="chat">
+                                <input class="form-control" type="text" id="inputMessage" placeholder="Escribe un mensaje...">
+                                <button class="button-general primary-modificacion" type="submit" id="btnMessage">Enviar</button>
+                            </div>
+                            <a class="button-general alert-modificacion" href="{% url 'mensajeria_app:mensajeria' %}">Salir</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="grid-x bordered-container">
+                <div class="cell large-3">
+                    <div class="card-body">
+                        <h3 class="h3-tamaño">Usuarios Conectados:</h3>
+                        {# mostramos los usuarios conectados en la sala #}
+                        <ul class="list-group-item" id="userList"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var user = "{{ request.user }}"
+        var room_id = "{{ room.id }}"
+        
+    </script>
+    <script src="{% static '/js/jquery-3.7.1.min.js' %}"></script>
+    <script src="{% static '/js/chat.js' %}"></script>
+    
+</main>
+
+{% endblock content %}

@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Ficha técnica {{fichatecnica.codigo}}
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'ficha_tecnica_app:ficha-tecnica-vista' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+
+    <h1 class="centrar">FICHA TECNICA: {{fichatecnica.codigo}}</h1>
+    <div class="contenedor">
+        <div class="grids--modificado">
+            <div class="grid-items--modificado">
+                <button id="btnCompleto" aria-pressed="false" aria-controls="detalleCompleto" class="link--modificados">COMPLETO</button>
+            </div>
+            <div class="grid-items--modificado">
+                <button id="btnPersonalizado" aria-pressed="false" aria-controls="detallePersonalizado" class="link--modificado">PERSONALIZADO</button>
+            </div>
+        </div>
+    </div>
+
+
+    <div id="detalleCompleto" role="region" aria-labelledby="btnCompleto">
+
+        <!-- Contenido detallado para el botón "Completo" -->
+
+        <div class="gran-grid">
+            <div class="griditos">
+                {% if object.cliente.imagen %}
+                <img src="{{ fichatecnica.cliente.imagen.url }}" alt="{{ object.cliente.fantasia }}" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">{{ object.cliente.fantasia }}</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">{{ object.codigo }}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Cantidad: {{ object.cantidad }}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Fecha inicio: {{ object.fecha_ingreso}}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p"> {{ object.prototipo.nombre}} </p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Fecha entrega: {{ object.fecha_egreso}}</p>
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_general %}
+                <img src="{{ fichatecnica.imagen_general.url }}" alt="Imagen de la ficha genereal" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN GENERAL DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_general %}
+                <p class="tamaño-p">Observacion general: {{ object.hoja_vida_general}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES GENERALES DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_corte %}
+                <img src="{{ fichatecnica.imagen_corte.url }}" alt="Imagen del sector corte" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE CORTE DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_corte %}
+                <p class="tamaño-p">Observacion corte: {{ object.hoja_vida_corte}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CORTE DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_avios %}
+                <img src="{{ fichatecnica.imagen_avios.url }}" alt="Imagen del sector avios" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE AVIOS DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_avios %}
+                <p class="tamaño-p">Observacion avios: {{ object.hoja_vida_avios}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE AVIOS DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_estampado %}
+                <img src="{{ fichatecnica.imagen_estampado.url }}" alt="Imagen del sector estampado"
+                    class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE ESTAMPADO DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_estampado %}
+                <p class="tamaño-p">Observacion estampado: {{ object.hoja_vida_estampado}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE ESTAMPADO DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_confeccion %}
+                <img src="{{ fichatecnica.imagen_confeccion.url }}" alt="Imagen del sector confeccion"
+                    class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE CONFECCION DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_confeccion %}
+                <p class="tamaño-p">Observacion confeccion: {{ object.hoja_vida_confeccion}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CONFECCION DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+            <div class="griditos">
+                {% if object.hoja_vida_calidad %}
+                <p class="tamaño-p">Observacion calidad: {{ object.hoja_vida_calidad}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CALIDAD DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+        </div>
+    </div>
+
+
+
+    <div id="detallePersonalizado"  role="region" aria-labelledby="btnPersonalizado">
+        <!-- Contenido detallado para el botón "Personalizado" -->
+        <!-- ESTO LO VEN TODOS -->
+        <div class="gran-grid">
+            <div class="griditos">
+                {% if object.cliente.imagen %}
+                <img src="{{ fichatecnica.cliente.imagen.url }}" alt="Imagen del cliente" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">{{ object.cliente.fantasia }}</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">{{ object.codigo }}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Cantidad: {{ object.cantidad }}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Fecha inicio: {{ object.fecha_ingreso}}</p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p"> {{ object.prototipo.nombre}} </p>
+            </div>
+            <div class="griditos">
+                <p class="tamaño-p">Fecha entrega: {{ object.fecha_egreso}}</p>
+            </div>
+
+            <div class="griditos">
+                {% if object.imagen_general %}
+                <img src="{{ fichatecnica.imagen_general.url }}" alt="Imagen de la ficha genereal"
+                    class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN GENERAL DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_general %}
+                <p class="tamaño-p">Observacion general: {{ object.hoja_vida_general}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES GENERALES DISPONIBLE</p>
+                {% endif %}
+            </div>
+
+
+
+
+            {% for sector in user_sectors %}
+
+            <!-- ACA CONDICION PARA LOS QUE PUEDAN VER sector_asignado Corte -->
+            {% if sector.nombre == 'Corte' %}
+            <div class="griditos">
+                {% if object.imagen_corte %}
+                <img src="{{ fichatecnica.imagen_corte.url }}" alt="Imagen del sector corte" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE CORTE DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_corte %}
+                <p class="tamaño-p">Observacion corte: {{ object.hoja_vida_corte}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CORTE DISPONIBLE</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+
+            <!-- ACA CONDICION PARA LOS QUE PUEDAN VER sector_asignado Avios -->
+            {% if sector.nombre == 'Avios' %}
+            <div class="griditos">
+                {% if object.imagen_avios %}
+                <img src="{{ fichatecnica.imagen_avios.url }}" alt="Imagen del sector avios" class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE AVIOS DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_avios %}
+                <p class="tamaño-p">Observacion avios: {{ object.hoja_vida_avios}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE AVIOS DISPONIBLE</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- ACA CONDICION PARA LOS QUE PUEDAN VER sector_asignado Estampado -->
+            {% if sector.nombre == 'Estampado' %}
+            <div class="griditos">
+                {% if object.imagen_estampado %}
+                <img src="{{ fichatecnica.imagen_estampado.url }}" alt="Imagen del sector estampado"
+                    class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE ESTAMPADO DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_estampado %}
+                <p class="tamaño-p">Observacion estampado: {{ object.hoja_vida_estampado}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE ESTAMPADO DISPONIBLE</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+
+            <!-- ACA CONDICION PARA LOS QUE PUEDAN VER sector_asignado Confeccion -->
+            {% if sector.nombre == 'Confección' %}
+            <div class="griditos">
+                {% if object.imagen_confeccion %}
+                <img src="{{ fichatecnica.imagen_confeccion.url }}" alt="Imagen del sector confeccion"
+                    class="ficha-imagen">
+                {% else %}
+                <p class="tamaño-p">NO HAY IMAGEN DE CONFECCION DISPONIBLE</p>
+                {% endif %}
+            </div>
+            <div class="griditos">
+                {% if object.hoja_vida_confeccion %}
+                <p class="tamaño-p">Observacion confeccion: {{ object.hoja_vida_confeccion}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CONFECCION DISPONIBLE</p>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            <!-- ACA CONDICION PARA LOS QUE PUEDAN VER sector_asignado Calidad -->
+            {% if sector.nombre == 'Calidad' %}
+            <div class="griditos">
+                {% if object.hoja_vida_calidad %}
+                <p class="tamaño-p">Observacion calidad: {{ object.hoja_vida_calidad}}</p>
+                {% else %}
+                <p class="tamaño-p">NO HAY OBSERVACIONES DE CALIDAD DISPONIBLE</p>
+                {% endif %}
+            </div>
+            {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+
+<script>
+    document.getElementById('btnCompleto').addEventListener('click', function () {
+        // Mostrar detalle completo al hacer clic en Completo
+        document.getElementById('detalleCompleto').style.display = 'block';
+        document.getElementById('detallePersonalizado').style.display = 'none';
+    });
+
+    document.getElementById('btnPersonalizado').addEventListener('click', function () {
+        // Mostrar detalle personalizado al hacer clic en Personalizado
+        document.getElementById('detalleCompleto').style.display = 'none';
+        document.getElementById('detallePersonalizado').style.display = 'block';
+    });
+</script>
+{% endblock content %}

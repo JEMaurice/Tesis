@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Login
+{% endblock tittle %}
+
+{% block content %}
+
+<div class="inicio">
+  <div class="inicio__contenedor">
+    <h1 class="contenedor__titulo" aria-label="titulo principal">Iniciar sesión</h1>
+    <form method="post" action="{% url 'home_app:login' %}">
+      {% csrf_token %}
+
+      <div class="contenedor__caja">
+        <label class="contenedor__label" for="id_username">
+          <p class="input-p">Usuario:</p>
+          <input type="text" id="id_username" name="username" required aria-required="true"
+            aria-label="Nombre de usuario" placeholder="Ej: Joel">
+        </label>
+      </div>
+
+      <div class="contenedor__caja">
+        <label class="contenedor__label" for="id_password">
+          <p class="input-p">Contraseña:</p>
+          <div class="botonojo">
+            <input type="password" id="id_password" name="password" required aria-required="true"
+              aria-label="Contraseña">
+            <button type="button" id="togglePassword">
+              <img src="{% static 'img/principal/ojocerrado.png' %}" alt="Mostrar/Ocultar contraseña" id="eyeIcon">
+            </button>
+          </div>
+        </label>
+      </div>
+
+      <div class="contenedor__caja">
+        <button type="submit" class="button" aria-label="Iniciar sesión">Iniciar Sesión</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<script>
+document.getElementById('togglePassword').addEventListener('click', function () {
+  const passwordField = document.getElementById('id_password');
+  const eyeIcon = document.getElementById('eyeIcon');
+  const type = passwordField.getAttribute('type') === 'password' ? 'text' : 'password';
+  passwordField.setAttribute('type', type);
+  eyeIcon.src = type === 'password' ? '{% static "img/principal/ojocerrado.png" %}' : '{% static "img/principal/ojoabierto.png" %}';
+});
+</script>
+{% endblock content %}

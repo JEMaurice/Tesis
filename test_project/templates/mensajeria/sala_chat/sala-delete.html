@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Borrar sala de chat
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'mensajeria_app:sala' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+
+    <div class="grid-container">
+        <div class="grid-x centrado margen-sup">
+            <h1>Borrar Sala de chat</h1>
+            <div class="cell">
+                <form class="cell grid-x grid-margin-x centrado" method="post"> {% csrf_token %}
+                    <div class="callout secondary">
+                        <label>
+                            <h3>¿Desea eliminar la sala de chat? </h3>
+                            <p class="input-p text__inicio">Nombre: {{ object.name }}</p>
+                            <p class="input-p text__inicio">Nombre de usuario(s):</p>
+                            {% for e in object.users.all %}
+                            <p class="input-p text__inicio">{{ e.username }}</p>
+                            {% endfor %}
+                        </label>
+                        <form action="" method="post"> {% csrf_token %}
+                            <button type="submit" class="button-general button-borrar">Confirmar</button>
+                        </form>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

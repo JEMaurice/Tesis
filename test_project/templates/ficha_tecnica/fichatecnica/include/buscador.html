@@ -1,0 +1,18 @@
+<h1 aria-label="Titulo principal">Lista de fichas tecnicas</h1>
+<form method="GET">
+    <div class="grids--modificados">
+        <label for="kword" class="sr-only">Buscar ficha tecnica por codigo o razon social del cliente</label>
+        <input type="text" class="form-control" id="kword" name="kword" placeholder="Buscar ficha tecnica por codigo o razon social del cliente...">
+        <button type="submit" class="button-general primary-modificacion" aria-label="Buscar">Buscar</button>
+    </div>
+    <div class="buscador-ver">
+        <div>
+            <a href="{% url 'ficha_tecnica_app:ficha-tecnica' %}">Ver todos</a>
+        </div>
+        <div class="mayor">
+            {% for letter in 'abcdefghijklmnopqrstuvwxyz' %}
+            <a href="{% url 'ficha_tecnica_app:ficha-tecnica' %}?letter={{ letter }}">{{ letter|upper }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</form>

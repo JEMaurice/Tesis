@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Sala de chat
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="sala_bienvenida">
+        <h1 aria-label="Titulo principal">Bienvenido a la sala de chat</h1>
+        <h2 class="h2-tamaño" aria-label="Titulo secundario">Elige un sector al cual quieras ingresar. Recuerda que si no tienes el permiso, no podrás entrar.</h2>
+    
+        <div class="cell large-12 mensaje-bloque">
+            {% if error_message %}
+            <ul class="messages error-mensaje">
+                <li>{{ error_message }}</li>
+            </ul>
+            {% endif %}
+        </div>
+    
+        <div class="button-container">
+            {% for e in room %}
+            <a href="{% url 'mensajeria_app:room' e.id %}" class="button button--sala">{{ e.name }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Tipo color
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'home_app:funciones' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    {% include "includes/mensaje_exito.html" %}
+    <div class="grid-container">
+        {% include 'insumo/tipocolor/include/buscador.html' %}
+        <div class="grid-x">
+            <a href="{% url 'insumo_app:tipo-color-add' %}" class="button-general button5">Agregar color</a>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="900">NOMBRE</th>
+                            <th width="450">ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for e in tipocolor %}
+                        <tr>
+                            <td>{{ e.nombre }}</td>
+                            <td>
+                                <a href="{% url 'insumo_app:tipo-color-detalle' e.id %}"
+                                    class="button-edicion button-crear">Detalle</a>
+                                <a href="{% url 'insumo_app:tipo-color-modificar' e.id %}"
+                                    class="button-edicion button-editar">Editar</a>
+                                <a href="{% url 'insumo_app:tipo-color-borrar' e.id %}" class="button-edicion button-borrar">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% include 'includes/paginated.html' %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

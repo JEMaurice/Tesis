@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Modificar sala de chat
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'mensajeria_app:sala' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1>Modificar sala de chat</h1>
+            <div class="cell">
+                <form class="cell grid-x grid-margin-x" method="post"> {% csrf_token %}
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Sector (SOLO 1 POR CHAT):</p>
+                            {{ form.name }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Nombre de Usuario:</p>
+                            {{ form.users }}
+                        </label>
+                    </div>
+                    <div class="cel large-6l">
+                        <button type="submit" class="button-general button-crear">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

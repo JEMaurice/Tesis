@@ -1,0 +1,138 @@
+{% extends 'base.html' %}
+
+{% block tittle %}
+Agregar Usuario
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'usuario_app:usuario' %}" class="button-general">Atras</a>
+    </div>
+</div>
+<div class="grid-container">
+    <div class="grid-x">
+        <h1>Agregar Usuario</h1>
+        <div class="cell">
+            <form class="cell grid-x grid-margin-x" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">Nombre de usuario:</p>
+                        {{ form.username }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Sector asignado(s):</p> 
+                        {{ form.sector_asignado }}
+                    </label>
+                    <a href="{% url 'sector_app:nombre-sector-add' %}" class="button secondary secondary--modificado"
+                        target="_blank">Agregar</a>
+                </div>
+
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">Contraseña:</p>
+                        {{ form.password1 }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">Repetir Contraseña:</p> 
+                        {{ form.password2 }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">DNI:</p> 
+                        {{ form.dni }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Nombre(s):</p> 
+                        {{ form.nombre }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Apellido:</p> 
+                        {{ form.apellido }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Mail:</p>
+                        {{ form.email }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Dirección:</p> 
+                        {{ form.direccion }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Imangen:</p> 
+                        {{ form.imagen }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Telefono:</p> 
+                        {{ form.telefono }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label> 
+                        <p class="input-p">Telefono de contacto:</p> 
+                        {{ form.contacto }}
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">¿Es empleado autorizado?   
+                        {{ form.is_staff }}</p> 
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">¿Es encargado/administrador?   
+                        {{ form.is_superuser }}</p>
+                    </label>
+                </div>
+
+                <div class="cell large-6">
+                    <label>
+                        <p class="input-p">¿Usuario activo?   
+                        {{ form.usuario_activo }}</p> 
+                    </label>
+                </div>
+
+                <div class="cell">
+                    <button type="submit" class="button-general button-crear">Agregar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+</main>
+
+{% endblock content %}

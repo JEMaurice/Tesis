@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Piezas
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'home_app:funciones' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    {% include 'includes/mensaje_exito.html' %}
+    <div class="grid-container">
+        {% include 'prototipo/piezas/include/buscador.html' %}
+        <div class="grid-x">
+            <a href="{% url 'prototipo_app:piezas-add' %}" class="button-general button5">Agregar pieza</a>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="900">NOMBRE</th>
+                            <th width="400">ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for e in piezas %}
+                        <tr>
+                            <td>{{ e.nombre }}</td>
+                            <td>
+                                <a href="{% url 'prototipo_app:piezas-detalle' e.id %}"
+                                    class="button-edicion button-crear">Detalle</a>
+                                <a href="{% url 'prototipo_app:piezas-modificar' e.id %}"
+                                    class="button-edicion button-editar">Editar</a>
+                                <a href="{% url 'prototipo_app:piezas-borrar' e.id %}" class="button-edicion button-borrar">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% include 'includes/paginated.html' %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

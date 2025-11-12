@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Agregar tipo de unidad
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'insumo_app:tipo-unidad' %}" class="button">Atras</a>
+    </div>
+</div>
+<div class="grid-container">
+    <div class="grid-x">
+        <h1>Agregar unidad de medida</h1>
+        <div class="cell">
+            <form class="cell grid-x grid-margin-x" method="post"> {% csrf_token %}
+                <div class="cell large-6">
+                    <label> Nombre: {{ form.nombre }}</label>
+                    <button type="submit" class="success button">Agregar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

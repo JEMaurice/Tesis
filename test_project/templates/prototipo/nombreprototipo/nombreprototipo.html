@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Nombre de prototipo
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'home_app:funciones' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    {% include 'includes/mensaje_exito.html' %}
+    <div class="grid-container">
+        {% include 'prototipo/nombreprototipo/include/buscador.html' %}
+        <div class="grid-x">
+            <a href="{% url 'prototipo_app:nombre-prototipo-add' %}" class="button-general button5">Agregar nombre de
+                prototipo</a>
+            <div class="cell">
+                <table>
+                    <thead>
+                        <tr>
+                            <th width="900">NOMBRE</th>
+                            <th width="400">ACCION</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        {% for e in nombreprototipo %}
+                        <tr>
+                            <td>{{ e.nombre }}</td>
+                            <td>
+                                <a href="{% url 'prototipo_app:nombre-prototipo-detalle' e.id %}"
+                                    class="button-edicion button-crear">Detalle</a>
+                                <a href="{% url 'prototipo_app:nombre-prototipo-modificar' e.id %}"
+                                    class="button-edicion button-editar">Editar</a>
+                                <a href="{% url 'prototipo_app:nombre-prototipo-borrar' e.id %}"
+                                    class="button-edicion button-borrar">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% include 'includes/paginated.html' %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

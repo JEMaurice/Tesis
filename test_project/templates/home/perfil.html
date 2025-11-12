@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Perfil
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+<main class="main-principal">
+
+    <div class="grid-container borde-redondo">
+        <div class="grid-x">
+            <h1 class="estilo-h1">Perfil</h1>
+            <div class="cell">
+                <form class="cell grid-x grid-margin-x" method="post"> {% csrf_token %}
+                    <div class="cell large-7">
+                        <p class="input-p padd">DNI: {{ request.user.dni }}</p>
+                        <p class="input-p padd">Nombre(s): {{ request.user.nombre }} </p>
+                        <p class="input-p padd">Apellido: {{ request.user.apellido }} </p>
+                        <p class="input-p padd">Mail: {{ request.user.email }} </p>
+                        <p class="input-p padd">Dirección: {{ request.user.direccion }}</p>
+
+                        <p class="input-p padd">Telefono: {{ request.user.telefono }}</p>
+                        <p class="input-p padd">Telefono de contacto: {{ request.user.contacto }}</p>
+                    </div>
+
+                    <div class="cell large-5">
+                        {% if request.user.imagen %}
+                        <div class="contenedor-imagen" style="justify-items: center;">
+                            <img src="{{ request.user.imagen.url }}" alt="Imagen de usuario" class="imagen-redonda">
+                        </div>
+                        {% else %}
+                        <p class="input-p padd">No hay imagen disponible</p>
+                        {% endif %}
+                    </div>
+                    <td><a href="{% url 'home_app:perfil_editar' pk=request.user.pk %}" class="button-general"
+                            style="margin-left: 25px;">Editar</a>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

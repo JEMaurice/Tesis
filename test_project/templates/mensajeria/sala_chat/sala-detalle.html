@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Detalle Sala de chat
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'mensajeria_app:sala' %}" class="button-general">Atras</a>
+    </div>
+</div>
+<div class="grid-container borde-redondo">
+    <div class="grid-x centrado">
+        <h1 class="estilo-h1">Detalle de sala de chat</h1>
+        <div class="cell">
+            <form class="cell grid-x grid-margin-x">
+                <div class="cell large-6">
+                    <p class="input-p">Sector:</p>
+                    <p class="input-p paddx2">{{ object.name }}</p>
+                    <p class="input-p">Nombre de usuario(s):</p>
+                    <ul class="input-p" style="list-style-type: none;">
+                        {% for e in object.users.all %}
+                        <p class="input-p">{{ e.username }}
+                        {% endfor %}
+                    </ul>
+                    </label>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</main>
+{% endblock content %}

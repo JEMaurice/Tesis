@@ -1,0 +1,36 @@
+{% load static %}
+<header class="header">
+  <div class="header__contenedor-logo">
+    <img src="{% static 'img/principal/logo.png' %}" alt="Logo Desert" class="header__logo">
+  </div>
+  <nav class="header__nav">
+    <ul class="header__nav-list header__nav-list--center">
+      {% if request.user.is_superuser %}
+      <li class="header__nav-item"><a href="{% url 'home_app:funciones' %}">Funciones</a></li>
+      <li class="header__nav-item"><a href="{% url 'ficha_tecnica_app:ficha-tecnica-vista' %}">Ficha técnica</a></li>
+      <li class="header__nav-item"><a href="{% url 'mensajeria_app:mensajeria' %}">Mensajería</a></li>
+      <li class="header__nav-item"><a href="{% url 'home_app:calculador' %}">Calculador</a></li>
+      <li class="header__nav-item"><a href="{% url 'home_app:perfil' %}">Perfil</a></li>
+
+      {% else %}
+      <li class="header__nav-item"><a href="{% url 'ficha_tecnica_app:ficha-tecnica-vista' %}">Ficha técnica</a></li>
+      <li class="header__nav-item"><a href="{% url 'mensajeria_app:mensajeria' %}">Mensajería</a></li>
+      <li class="header__nav-item"><a href="{% url 'home_app:perfil' %}">Perfil</a></li>
+      <div>
+
+      </div>
+      {% endif %}
+    </ul>
+    <ul class="header__nav-list header__nav-list--end">
+      <li class="header__nav-item">
+        <a href="{% url 'home_app:home' %}">Inicio</a>
+      </li>
+      <li class="header__nav-item">
+        <form method="post" action="{% url 'home_app:logout' %}">
+          {% csrf_token %}
+          <button type="submit" class="nav-item__button">Cerrar Sesión</button>
+        </form>
+      </li>
+    </ul>
+  </nav>
+</header>

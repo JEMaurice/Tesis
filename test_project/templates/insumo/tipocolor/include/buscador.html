@@ -1,0 +1,18 @@
+<h1 aria-label="Titulo principal">Lista de tipos de colores</h1>
+<form method="GET">
+    <div class="grids--modificados">
+        <label for="kword" class="sr-only">Buscar tipo de color</label>
+        <input type="text" class="form-control" id="kword" name="kword" placeholder="Buscar tipo de color...">
+        <button type="submit" class="button-general primary-modificacion" aria-label="Buscar">Buscar</button>
+    </div>
+    <div class="buscador-ver">
+        <div>
+            <a href="{% url 'insumo_app:tipo-color' %}">Ver todos</a>
+        </div>
+        <div class="mayor">
+            {% for letter in 'abcdefghijklmnopqrstuvwxyz' %}
+            <a href="{% url 'insumo_app:tipo-color' %}?letter={{ letter }}">{{ letter|upper }}</a>
+            {% endfor %}
+        </div>
+    </div>
+</form>

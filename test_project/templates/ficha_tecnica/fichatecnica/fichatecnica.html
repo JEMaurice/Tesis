@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Ficha tecnica
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'home_app:funciones' %}" class="button-general">Atras</a>
+    </div>
+</div>
+{% include 'includes/mensaje_exito.html' %}
+<div class="grid-container">
+    {% include 'ficha_tecnica/fichatecnica/include/buscador.html' %}
+    <div class="grid-x">
+        <a href="{% url 'ficha_tecnica_app:ficha-tecnica-add' %}" class="button-general button5">Agregar ficha tecnica</a>
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="150">CODIGO</th>
+                        <th width="150">CLIENTE</th>
+                        <th width="150">PROTOTIPO</th>
+                        <th width="150">CANTIDAD</th>
+                        <th width="150">ESTADO</th>
+                        <th width="150">FECHA INGRESO</th>
+                        <th width="150">FECHA EGRESO</th>
+                        <th width="400">ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for e in fichatecnica %}
+                    <tr>
+                        <td>{{ e.codigo }}</td>
+                        <td>{{ e.cliente.razon_social }}</td>
+                        <td>Prototipo {{ e.prototipo.id }}: {{ e.prototipo.nombre }}</td>
+                        <td>{{ e.cantidad }}</td>
+                        <td>{{ e.estado }}</td>
+                        <td>{{ e.fecha_ingreso }}</td>
+                        <td>{{ e.fecha_egreso }}</td>
+                        <td>
+                            <a href="{% url 'ficha_tecnica_app:ficha-tecnica-detalle' e.id %}"
+                                class="button-edicion button-crear">Detalle</a>
+                            <a href="{% url 'ficha_tecnica_app:ficha-tecnica-modificar' e.id %}"
+                                class="button-edicion button-editar">Editar</a>
+                            <a href="{% url 'ficha_tecnica_app:ficha-tecnica-borrar' e.id %}"
+                                class="button-edicion button-borrar">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% include 'includes/paginated.html' %}
+    </div>
+</div>
+</main>
+{% endblock content %}

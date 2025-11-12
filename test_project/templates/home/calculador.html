@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Calculador
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+<main class="main-principal">
+    <h1 aria-label="Titulo principal">Calculador de materia prima</h1>
+    <div class="cell grid-x grid-margin-x margen-sup-inf">
+
+        <div class="cell large-6">
+            <label class="input-p">Cantidad:
+                <input type="number" id="cantidad-input"></input>
+            </label>
+        </div>
+
+        <div class="cell large-6">
+            <label class="input-p">Ancho de tela:
+                <input type="number" id="ancho-input"></input>
+            </label>
+        </div>
+
+        <div class="cell large-12">
+            <label class="input-p">Prototipo:
+                <select id="select-prototipo" name="prototipo">
+                    <option value="">Seleccionar prototipo</option>
+                    {% for prototipo in prototipos %}
+                    <option value="{{ prototipo.id }}">{{ prototipo.nombre }}</option>
+                    {% endfor %}
+                </select>
+            </label>
+        </div>
+
+        <div id="tabla-prototipo" class="cell margen-sup-inf">
+
+
+
+        </div>
+    </div>
+</main>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+
+    $(document).ready(function () {
+        $('#select-prototipo').change(function () {
+            var prototipo_id = $(this).val();
+            var cantidad = parseInt($('#cantidad-input').val());
+            var ancho = parseFloat($('#ancho-input').val());
+
+            // Creo acumulador para contar el total de metros de tela que necesito
+            var totaltotalmetrosusar = 0;
+
+            $.ajax({
+                url: "{% url 'home_app:obtener_datos' %}",
+                type: 'GET',
+                data: {
+                    'prototipo_id': prototipo_id,
+                    'cantidad': cantidad,
+                    'ancho': ancho,
+                },
+                success: function (data) {
+                    // Trae la informacion del otro html
+                    $('#tabla-prototipo').html(data.html);
+
+                    // Calculo cuarta columna
+                    $('.piezas-ancho').each(function (index) {
+                        var anchopieza = parseFloat($(this).text().replace(",", "."));
+                        var piezaporancho = Math.trunc(ancho / anchopieza);
+                        $(this).closest('tr').find('.piezas-por-ancho').text(piezaporancho);
+                    });
+
+                    // Calculo quinta columna
+                    $('.cantidad-pieza').each(function (index) {
+                        var cantidadpieza = parseInt($(this).text());
+                        var totalpiezas = cantidad * cantidadpieza;
+                        $(this).closest('tr').find('.total-piezas').text(totalpiezas);
+                    });
+
+                    // Calculo sexta columna
+                    $('.pieza-alto').each(function (index) {
+                        var altotext = $(this).text().replace(",", ".");
+                        var alto = parseFloat(altotext);
+                        var totalpiezastext = $(this).closest('tr').find('.total-piezas').text().replace(",", ".");
+                        var totalpiezas = parseInt(totalpiezastext);
+                        var piezaporanchotext = $(this).closest('tr').find('.piezas-por-ancho').text().replace(",", ".");
+                        var piezaporancho = parseInt(piezaporanchotext);
+                        var totalmentrosausar = totalpiezas * alto / piezaporancho;
+                        totaltotalmetrosusar += totalmentrosausar
+                        $(this).closest('tr').find('.metros-a-usar').text(totalmentrosausar.toFixed(2));
+                        $(this).closest('div').find('.cell.large-12.1').html("<p style='margin:5px font-size: 1.3rem; line-height: 1.2; margin-bottom: 6px;'><strong>TOTAL DE METROS A UTIZIDAR DE TELA PARA REALIZAR EL PROTOTIPO ES DE: " + totaltotalmetrosusar.toFixed(2) + " METROS.</strong></p>");
+                    });
+
+                    // Calculo contables
+                    $('.cantidad-por-pieza').each(function (index) {
+                        var cantidadporpieza = parseInt($(this).text());
+                        var totalpiezas = cantidad * cantidadporpieza;
+                        $(this).closest('tr').find('.cantidad-a-usar').text(totalpiezas);
+                    });
+
+                    // Calculo medibles
+                    $('.metros-por-pieza').each(function (index) {
+                        // Obtener el valor de 'metros' y 'cantidad' para cada pieza
+                        var metrostext = $(this).text().replace(",", ".");
+                        var metros = parseFloat(metrostext);
+
+                        // Obtener la cantidad del prototipo para la pieza
+                        var cantidad_prototipo_text = $(this).closest('tr').find('.cantidad-por-pieza').text();
+                        var cantidad_prototipo = parseInt(cantidad_prototipo_text);
+
+                        // Obtener la cantidad ingresada por el usuario
+                        var cantidad_input = parseInt($('#cantidad-input').val());
+
+                        // Calcular los metros totales a usar
+                        var totalmetros = metros * cantidad_prototipo * cantidad_input;
+
+                        // Colocar el resultado en la celda correspondiente
+                        $(this).closest('tr').find('.metros-a-usar').text(totalmetros.toFixed(2));
+                    });
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                },
+            });
+        });
+    });
+</script>
+
+{% endblock content %}

@@ -1,0 +1,9 @@
+from django.apps import AppConfig
+
+
+class PersonasConfig(AppConfig):
+    default_auto_field = 'django.db.models.BigAutoField'
+    name = 'applications.sector'
+
+    def ready(self):
+        import applications.sector.signals

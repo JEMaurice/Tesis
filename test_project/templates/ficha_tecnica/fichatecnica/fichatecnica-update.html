@@ -1,0 +1,154 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Modificar ficha Tecnica
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'ficha_tecnica_app:ficha-tecnica' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    <div class="grid-container">
+        <div class="grid-x">
+            <h1>Modificar ficha tecnica</h1>
+            <div class="cell">
+                <form class="cell grid-x grid-margin-x" method="post" enctype="multipart/form-data"> {% csrf_token %}
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Codigo:</p>
+                            {{ form.codigo }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Cliente:</p> 
+                            {{ form.cliente }}
+                        </label>
+                        <a href="{% url 'cliente_app:cliente-add' %}" class="button secondary secondary--modificado" target="_blank">Agregar
+                            cliente</a>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Prototipo:</p> 
+                            {{ form.prototipo }}
+                        </label>
+                        <a href="{% url 'prototipo_app:prototipo-add' %}" class="button secondary secondary--modificado"
+                            target="_blank">Agregar
+                            prototipo</a>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Cantidad:</p>
+                            {{ form.cantidad }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Fecha de ingreso:</p>
+                            {{ form.fecha_ingreso }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Fecha de egrese:</p>
+                            {{ form.fecha_egreso }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Estado:</p>
+                            {{ form.estado }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-6"></div>
+
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Imagen general:</p>
+                            {{ form.imagen_general }}
+                        </label>
+                        <label>
+                            <p class="input-p">Observaciones generales:</p>
+                            {{ form.hoja_vida_general }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Imagen Corte:</p>
+                            {{ form.imagen_corte }}
+                        </label>
+                        <label>
+                            <p class="input-p">Observaciones Corte:</p>
+                            {{ form.hoja_vida_corte }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Imagen avios:</p>
+                            {{ form.imagen_avios }}
+                        </label>
+                        <label>
+                            <p class="input-p">Observaciones avios:</p>
+                            {{ form.hoja_vida_avios }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Imagen estampado:</p>
+                            {{ form.imagen_estampado }}
+                        </label>
+                        <label>
+                            <p class="input-p">Observaciones estampado:</p>
+                            {{ form.hoja_vida_estampado }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Imagen confeccion:</p>
+                            {{ form.imagen_confeccion }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6"></div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Observaciones confeccion:</p>
+                            {{ form.hoja_vida_confeccion }}
+                        </label>
+                    </div>
+    
+                    <div class="cell large-6">
+                        <label>
+                            <p class="input-p">Observaciones calidad:</p>
+                            {{ form.hoja_vida_calidad }}
+                        </label>
+                    </div>
+
+                    <div class="cell large-12">
+                        <button type="submit" class="button-general button-crear">Actualizar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+{% endblock content %}

@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Detalle prototipo
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'prototipo_app:prototipo' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    <div class="grid-container borde-redondo">
+        <div class="grid-x centrado">
+            <h1 class="estilo-h1">Detalle del prototipo</h1>
+            <div class="cell">
+                <div class="cell grid-x grid-margin-x">
+
+                    <div class="cell large-7">
+                        <p class="input-p padd">Nombre: {{ object.nombre }}</p>
+
+                        <p class="input-p padd">Pieza de prototipo: </p>
+
+                        <p class="input-p padd">CORTABLE</p>
+                        <ul class="paddx2">
+                            {% for e in object.prototipo_armado.all %}
+                            {% if e.tipo_pieza.tipo == '1' %}
+                            <li class="input-p">{{ e.piezas }}: Cantidad {{ e.cantidad }} - ancho {{ e.ancho }} - alto
+                                {{ e.alto }}</li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+
+                        <p class="input-p padd">CONTABLE</p>
+                        <ul class="paddx2">
+                            {% for e in object.prototipo_armado.all %}
+                            {% if e.tipo_pieza.tipo == '0' %}
+                            <li class="input-p">{{ e.piezas }}: Cantidad {{ e.cantidad }} </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+
+
+                        <p class="input-p padd">MEDIBLE</p>
+                        <ul class="paddx2">
+                            {% for e in object.prototipo_armado.all %}
+                            {% if e.tipo_pieza.tipo == '2' %}
+                            <li class="input-p">{{ e.piezas }}: Cantidad {{ e.cantidad }} - metros {{ e.metros }} </li>
+                            {% endif %}
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+                    <div class="cell large-5">
+                        {% if prototipo.imagen %}
+                        <div class="contenedor-imagen">
+                            <img src="{{ prototipo.imagen.url }}" alt="Imagen del prototipo" class="imagen-cuadrada">
+                        </div>
+                        {% else %}
+                        <p class="input-p padd">No hay imagen disponible</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

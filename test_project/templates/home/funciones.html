@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Funciones
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+
+<main class="main-principal">
+
+    <fieldset>
+        <legend>USUARIO</legend>
+
+        <div class="grids">
+            <a href="{% url 'sector_app:nombre-sector' %}" class="grid-items button1">Nombre sector</a>
+            <a href="{% url 'usuario_app:usuario' %}" class="grid-items button1">Usuario</a>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>CLIENTE PROVEEDOR</legend>
+
+        <div class="grids">
+            <a href="{% url 'cliente_app:cliente' %}" class="grid-items button5">Cliente</a>
+            <a href="{% url 'cliente_app:contacto-cliente' %}" class="grid-items button5">Contacto cliente</a>
+            <a href="{% url 'proveedor_app:proveedores' %}" class="grid-items button5">Proveedores</a>
+            <a href="{% url 'proveedor_app:contacto-proveedor' %}" class="grid-items button5">Contacto proveedor</a>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>INSUMOS</legend>
+
+        <div class="grids">
+            <a href="{% url 'insumo_app:tipo-color' %}" class="grid-items button3">Tipo de color</a>
+            <!-- <a href="{% url 'insumo_app:tipo-unidad' %}" class="grid-items button3">Tipo de unidad</a> -->
+            <a href="{% url 'insumo_app:tipo-insumo' %}" class="grid-items button3">Tipo de insumo</a>
+            <a href="{% url 'insumo_app:insumo' %}" class="grid-items button3">Insumo</a>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>PROTOTIPO</legend>
+
+        <div class="grids">
+            <a href="{% url 'prototipo_app:nombre-prototipo' %}" class="grid-items button4">Nombre prototipo</a>
+            <a href="{% url 'prototipo_app:piezas' %}" class="grid-items button4">Piezas</a>
+            <a href="{% url 'prototipo_app:pieza-prototipo' %}" class="grid-items button4">Pieza de prototipo</a>
+            <a href="{% url 'prototipo_app:prototipo' %}" class="grid-items button4">Prototipo</a>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>FICHA TECNICA</legend>
+
+        <div class="grids">
+            <a href="{% url 'ficha_tecnica_app:ficha-tecnica' %}" class="grid-items button5">Ficha tecnica</a>
+        </div>
+    </fieldset>
+
+    <fieldset>
+        <legend>MENSAJERIA</legend>
+
+        <div class="grids">
+            <a href="{% url 'mensajeria_app:sala' %}" class="grid-items button6">Sala de chat</a>
+            <!-- <a href="{% url 'home_app:calculador' %}" class="button warning">Calculador</a> -->
+        </div>
+    </fieldset>
+</main>
+
+{% endblock content %}

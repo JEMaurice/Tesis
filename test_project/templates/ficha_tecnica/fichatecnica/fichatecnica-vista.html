@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Ficha técnica
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <h1>Fichas técnicas disponibles</h1>
+    <div class="contenedor">
+        <div class="grids--modificado">
+            {% for e in fichatecnica %}
+            <div class="grid-items--modificado">
+                <a class="link--modificado" href="{% url 'ficha_tecnica_app:ficha-tecnica-detalle-personalizado' e.id %}">{{ e.codigo }}</a>
+            </div>
+            {% empty %}
+            <div class="grid-items--modificado">
+                No hay fichas técnicas activas.
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</main>
+{% endblock content %}

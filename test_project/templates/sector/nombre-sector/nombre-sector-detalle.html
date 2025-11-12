@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block tittle %}
+Detalle Nombre sector
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+<main class="main-principal">
+    <div class="grid-x">
+        <div class="cell auto text-right">
+            <a href="{% url 'sector_app:nombre-sector' %}" class="button-general">Atras</a>
+        </div>
+    </div>
+    <div class="grid-container borde-redondo">
+        <div class="grid-x centrado">
+                    <h1 class="estilo-h1">Detalle Nombre sector</h1>
+            <div class="cell">
+                <div class="cell grid-x grid-margin-x">
+                    <div class="cell large-6">
+                            <p class="input-p padd">Nombre: {{ object.nombre }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+{% endblock content %}

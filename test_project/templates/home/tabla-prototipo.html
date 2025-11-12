@@ -1,0 +1,91 @@
+<table>
+    <thead>
+        <tr>
+            <th width="350">NOMBRE</th>
+            <th width="150">CANTIDAD</th>
+            <th width="150">ANCHO</th>
+            <th width="150">ALTO</th>
+            <th width="200">PIEZAS POR ANCHO</th>
+            <th width="200">TOTAL PIEZAS</th>
+            <th width="200">METROS A USAR</th>
+
+        </tr>
+    </thead>
+    <tbody>
+        {% for pieza_prototipo in prototipo.prototipo_armado.all %}
+        {% if pieza_prototipo.tipo_pieza.tipo == "1" %} {% comment %} CORTABLE {% endcomment %}
+        <tr>
+            <td>{{ pieza_prototipo.piezas.nombre }}</td>
+            <td class="cantidad-pieza">{{ pieza_prototipo.cantidad }}</td>
+            <td class="piezas-ancho">{{ pieza_prototipo.ancho }}</td>
+            <td class="pieza-alto">{{ pieza_prototipo.alto }}</td>
+            <td class="piezas-por-ancho"></td>
+            <td class="total-piezas"></td>
+            <td class="metros-a-usar"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="cell large-12 1 margen-sup-inf-x2"></div>
+<table>
+    <thead>
+        <tr>
+            <th width="467">NOMBRE</th>
+            <th width="467">CANTIDAD</th>
+            <th width="467">CANTIDAD TOTAL A UTILIZAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pieza_prototipo in prototipo.prototipo_armado.all %}
+        {% if pieza_prototipo.tipo_pieza.tipo == "0" %} {% comment %} CONTABLE {% endcomment %}
+
+        <tr>
+            <td>{{ pieza_prototipo.piezas.nombre }}</td>
+            <td class="cantidad-por-pieza">{{ pieza_prototipo.cantidad }}</td>
+            <td class="cantidad-a-usar"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="cell large-12 margen-sup-inf-x2"></div>
+<table>
+    <thead>
+        <tr>
+            <th width="467">NOMBRE</th>
+            <th width="467">METROS</th>
+            <th width="467">CANTIDAD</th>
+            <th width="467">METROS TOTALES A UTILIZAR</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pieza_prototipo in prototipo.prototipo_armado.all %}
+        {% if pieza_prototipo.tipo_pieza.tipo == "2" %} {% comment %} MEDIBLE {% endcomment %}
+        <tr>
+            <td>{{ pieza_prototipo.piezas.nombre }}</td>
+            <td class="metros-por-pieza">{{ pieza_prototipo.metros }}</td>
+            <td class="cantidad-por-pieza">{{ pieza_prototipo.cantidad }}</td>
+            <td class="metros-a-usar"></td>
+        </tr>
+        {% endif %}
+        {% endfor %}
+    </tbody>
+</table>
+
+
+<div class="cell large-12 margen-sup-inf-x2">
+    <label> Imagen:
+        <div class="contenedor__imagen-calculador">
+            {% if prototipo.imagen %}
+            <img src="{{ prototipo.imagen.url }}" alt="Imagen del prototipo" class="imagen-calculador">
+            {% else %}
+            <p class="input-p">No hay imagen disponible</p>
+            {% endif %}
+        </div>
+    </label>
+</div>

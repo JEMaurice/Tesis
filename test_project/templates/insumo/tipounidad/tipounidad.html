@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Tipo de unidad
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'home_app:funciones' %}" class="button">Atras</a>
+    </div>
+</div>
+{% include 'includes/mensaje_exito.html' %}
+<div class="grid-container">
+    <div class="grid-x">
+        {% include 'insumo/tipounidad/include/buscador.html' %}
+        <a href="{% url 'insumo_app:tipo-unidad-add' %}" class="button success">Agregar unidad de medida</a>
+        <div class="cell">
+            <table>
+                <thead>
+                    <tr>
+                        <th width="900">NOMBRE</th>
+                        <th width="450">ACCION</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for e in tipounidad %}
+                    <tr>
+                        <td>{{ e.nombre }}</td>
+                        <td>
+                            <a href="{% url 'insumo_app:tipo-unidad-detalle' e.id %}" class="button success">Detalle</a>
+                            <a href="{% url 'insumo_app:tipo-unidad-modificar' e.id %}" class="button warning">Editar</a>
+                            <a href="{% url 'insumo_app:tipo-unidad-borrar' e.id %}" class="button alert">Borrar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% include 'includes/paginated.html' %}
+    </div>
+</div>
+{% endblock content %}

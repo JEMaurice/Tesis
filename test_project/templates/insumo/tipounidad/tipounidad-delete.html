@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block tittle %}
+Borrar tipo de unidad
+{% endblock tittle %}
+
+{% block content %}
+{% include "includes/header.html" %}
+
+<div class="grid-x">
+    <div class="cell auto text-right">
+        <a href="{% url 'insumo_app:tipo-unidad' %}" class="button">Atras</a>
+    </div>
+</div>
+
+<div class="grid-container">
+    <div class="grid-x">
+        <h1>Borrar unidad de medida</h1>
+        <div class="cell">
+            <form class="cell grid-x grid-margin-x" method="post"> {% csrf_token %}
+                <div class="callout secondary">
+                    <label>
+                        <h3>¿Desea eliminar la unidad de medida? </h3>
+                        <p>Nombre: {{ object.nombre }}</p>
+                    </label>
+                    <form action="" method="post"> {% csrf_token %}
+                        <button type="submit" class="alert button">Confirmar</button>
+                    </form>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}
