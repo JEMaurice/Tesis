@@ -1,0 +1,9 @@
+Django>=4.2,<5
+channels>=4.0
+daphne>=4.0
+channels-redis>=4.0
+django-ckeditor
+django-extensions
+Pillow
+psycopg2-binary
+asgiref
